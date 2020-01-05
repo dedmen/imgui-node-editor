@@ -3,8 +3,8 @@ if (TARGET ScopeGuard)
     return()
 endif()
 
-set(_ScopeGuard_SourceDir ${CMAKE_SOURCE_DIR}/ThirdParty/ScopeGuard)
-set(_ScopeGuard_BinaryDir ${CMAKE_BINARY_DIR}/ThirdParty/ScopeGuard)
+set(_ScopeGuard_SourceDir ${CMAKE_SOURCE_DIR}/imgui-node-editor/ThirdParty/ScopeGuard)
+set(_ScopeGuard_BinaryDir ${CMAKE_BINARY_DIR}/imgui-node-editor/ThirdParty/ScopeGuard)
 
 add_subdirectory(${_ScopeGuard_SourceDir} ${_ScopeGuard_BinaryDir})
 

@@ -176,7 +176,11 @@ std::wstring widen(const std::string& str)
 }
 # endif
 
-int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
+
+extern bool UIOpen;
+
+
+int StartUI()
 {
     const auto c_ClassName  = _T("Node Editor Class");
 # if defined(_UNICODE)
@@ -283,5 +287,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             frame();
     }
 
+    UIOpen = false;
     return 0;
 }

@@ -38,7 +38,7 @@ target_link_libraries(Application PUBLIC imgui ScopeGuard)
 target_link_libraries(Application PRIVATE stb_image)
 
 if (WIN32)
-    set(_DXSDK_Dir  ${CMAKE_SOURCE_DIR}/ThirdParty/DXSDK)
+    set(_DXSDK_Dir  ${CMAKE_SOURCE_DIR}/imgui-node-editor/ThirdParty/DXSDK)
     set(_DXSDK_Arch x86)
     if (${CMAKE_SIZEOF_VOID_P} EQUAL 8)
         set(_DXSDK_Arch x64)
@@ -57,6 +57,18 @@ if (WIN32)
     )
 
     target_link_libraries(Application PRIVATE d3d11.lib d3dcompiler.lib d3dx11)
+
+    if(CMAKE_COMPILER_IS_GNUCXX)
+        set(CMAKE_CXX_FLAGS "-std=c++1z -O2 -s -fPIC -fpermissive -static-libgcc -static-libstdc++")#-march=i686 -m32
+        set(CMAKE_FIND_LIBRARY_SUFFIXES ".a")
+        set(CMAKE_SHARED_LINKER_FLAGS "-shared -static-libgcc -static-libstdc++")
+    else()
+        set(CMAKE_CXX_FLAGS_DEBUG "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1 /MP /EHsc")
+        set(CMAKE_CXX_FLAGS_RELEASE "/MT /Zi /O2 /Ob1 /EHsc /MP") #with debug info
+        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/OPT:REF /DEBUG:FULL") 
+    endif()
+
+
 else()
     target_include_directories(Application PRIVATE ${OPENGL_INCLUDE_DIR})
 
